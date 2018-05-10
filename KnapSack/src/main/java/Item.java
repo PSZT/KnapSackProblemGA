@@ -6,4 +6,12 @@ public class Item {
         this.volume = volume;
         this.benefit = benefit;
     }
+
+    public int getVolume() {
+        return volume;
+    }
+
+    public int getBenefit() {
+        return benefit;
+    }
 }
