@@ -36,14 +36,16 @@ public class Chromosome {
                 chrTotalBenefit += items[i].getBenefit();
             }
 
-            /*if( chrTotalVolume > capacityOfKnapsack ) {
+            
+            if( chrTotalVolume > capacityOfKnapsack ) {
                 int n;
+                //Randomly choose items from the chromosome
+                //until we generate an item that is included in the knapsack
                 do {
-
-                } while ()
-            }*/
-
-
+                    n = rand.nextInt(size - 1);
+                } while (genes[n]==0);
+                genes[n] = 0;
+            }
         }
         return chrTotalBenefit;
     }
