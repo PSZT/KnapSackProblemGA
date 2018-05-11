@@ -14,4 +14,12 @@ public class Item {
     public int getBenefit() {
         return benefit;
     }
+
+    @Override
+    public String toString() {
+        return "Item{" +
+                "volume=" + volume +
+                ", benefit=" + benefit +
+                '}';
+    }
 }

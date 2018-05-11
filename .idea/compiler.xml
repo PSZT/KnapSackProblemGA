@@ -11,7 +11,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="compszt" target="1.5" />
-      <module name="KnapSack" target="1.5" />
+      <module name="KnapSack" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
