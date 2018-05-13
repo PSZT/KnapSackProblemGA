@@ -9,10 +9,11 @@ public class KnapsackAlgorithm {
     public Chromosome groupSelection(ArrayList<Chromosome> chr) {
 
 
-        Chromosome chosenChromosome;
+
         int randomChromosomeIndex;
         Random rand = new Random();
         int randomNumber = rand.nextInt(99)+1;
+        Chromosome chosenChromosome;
 
         if (randomNumber >= 0 && randomNumber < 50) {
 
