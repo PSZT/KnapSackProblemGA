@@ -20,10 +20,6 @@ public class Chromosome {
             i = 0;
         }
 
-        /*for (int i=0 ; i < genes.length ; i++) {
-            genes[i] = 0;
-        }*/
-
         this.chrTotalBenefit = 0;
         this.chrTotalVolume = 0;
     }

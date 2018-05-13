@@ -37,6 +37,7 @@ public class Population {
     private boolean checkEqualFitnessPercentage() {
         List<Pair<Integer,Integer>> pairs = new ArrayList<>();
         double perc =  populationSize * 0.9;
+        checkFitness(pairs);
         for(Pair p : pairs) {
             if((double)p.getLeft() > perc) {
                 return true;
@@ -46,7 +47,6 @@ public class Population {
     }
 
     private void checkFitness(List<Pair<Integer,Integer>> pairs){
-        //List<Pair<Integer,Integer>> pairs = new ArrayList<>();
         for(Chromosome chr : chromosomeList) {
             if(pairs.size() == 0) {
                 pairs.add(new Pair(chr.getChrTotalBenefit(),1));
