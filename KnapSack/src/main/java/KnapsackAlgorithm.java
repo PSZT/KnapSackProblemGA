@@ -1,8 +1,6 @@
-import java.awt.*;
-import java.lang.reflect.Array;
 import java.util.*;
 import java.util.List;
-import java.util.zip.CRC32;
+
 
 public class KnapsackAlgorithm {
 
