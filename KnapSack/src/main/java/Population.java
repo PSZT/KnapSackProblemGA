@@ -25,9 +25,9 @@ public class Population {
     }
 
     //we calculate fitness for each chromosome
-    public boolean chromosomesFitness(List<Item> items) {
+    public boolean chromosomesFitness(List<Item> items,int capacityOfKnapsack) {
         for (Chromosome chr : chromosomeList) {
-            chr.fitnessCalculate(items);
+            chr.fitnessCalculate(items,capacityOfKnapsack);
         }
         if(checkEqualFitnessPercentage())
             return true;

@@ -15,7 +15,6 @@ public class ReadFromFile {
 
     public ReadFromFile(String fileName) {
         this.fileName = fileName;
-        System.out.println(fileName);
         itemArrayList = new ArrayList<>();
     }
     public void readItems() throws IOException {
@@ -54,5 +53,14 @@ public class ReadFromFile {
         return backPackCapacity;
     }
 
-
+    @Override
+    public String toString() {
+        return "ReadFromFile{" +
+                "fileName='" + fileName + '\'' +
+                ", genNumber=" + genNumber +
+                ", popSize=" + popSize +
+                ", backPackCapacity=" + backPackCapacity +
+                ", itemArrayList=" + itemArrayList +
+                '}';
+    }
 }

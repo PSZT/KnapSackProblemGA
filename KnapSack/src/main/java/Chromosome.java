@@ -3,12 +3,11 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Chromosome {
-    int size;
-    int [] genes;
-    int chrTotalVolume;
-    int chrTotalBenefit;
-    int capacityOfKnapsack=15; //zeby nie wywalalo bledu. To jest calkowity rozmiar plecaka w funkcji fitnessCalculate
-    static SecureRandom rand;
+    private int size;
+    private int [] genes;
+    private int chrTotalVolume;
+    private int chrTotalBenefit;
+    private static SecureRandom rand;
 
     public Chromosome(int size) {
         this.rand = new SecureRandom();
@@ -22,6 +21,17 @@ public class Chromosome {
 
         this.chrTotalBenefit = 0;
         this.chrTotalVolume = 0;
+    }
+
+    public Chromosome(int size, int chrTotalVolume, int chrTotalBenefit) {
+        this.size = size;
+        this.chrTotalVolume = chrTotalVolume;
+        this.chrTotalBenefit = chrTotalBenefit;
+    }
+
+    public Chromosome(int size,int[] newGenes) {
+        this.size = size;
+        this.genes = newGenes;
     }
 
     public void generateRandomChromosome() {
@@ -43,7 +53,7 @@ public class Chromosome {
         return chrTotalBenefit;
     }
 
-    public void fitnessCalculate(List<Item> items) {
+    public void fitnessCalculate(List<Item> items,int capacityOfKnapsack) {
 
         for (int i=0 ; i < size ; i++) {
 
