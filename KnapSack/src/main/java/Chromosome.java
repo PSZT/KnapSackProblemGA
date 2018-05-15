@@ -41,6 +41,13 @@ public class Chromosome {
 
     }
 
+    public void setMutateGene(int geneToMutate) {
+        if(genes[geneToMutate] == 1)
+            genes[geneToMutate] = 0;
+        else
+            genes[geneToMutate] = 1;
+    }
+
     public int[] getGenes() {
         return genes;
     }
@@ -56,7 +63,6 @@ public class Chromosome {
     public void fitnessCalculate(List<Item> items,int capacityOfKnapsack) {
 
         for (int i=0 ; i < size ; i++) {
-
             //if current item is included in knapsack, add its volume and benefit
             //to the total volume and benefit
             if (genes[i] == 1) {
@@ -81,10 +87,10 @@ public class Chromosome {
 
     @Override
     public String toString() {
-        System.out.println();
+        //System.out.println();
         return "Chromosome{" +
 
-                ", genes=" + Arrays.toString(genes) +
+                "genes=" + Arrays.toString(genes) +
                 ", chrTotalVolume=" + chrTotalVolume +
                 ", chrTotalBenefit=" + chrTotalBenefit +
                 "}\n";

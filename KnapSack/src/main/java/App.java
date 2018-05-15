@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class App {
@@ -14,18 +15,25 @@ public class App {
         int counter =0;
         ReadFromFile readFromFile = new ReadFromFile(fileName);
         readFromFile.readItems();
+        System.out.println(readFromFile.toString());
+
+        //we create random population
         for(int i = 0 ; i < readFromFile.getPopSize() ; i++) {
             Chromosome chr = new Chromosome(readFromFile.getItemArrayList().size());
             chr.generateRandomChromosome();
             chromosomeList.add(chr);
         }
+
         do {
-            List<Chromosome> tempList = knapsackAlgorithm.processAlgorithm(chromosomeList,readFromFile.getItemArrayList(),
-                    readFromFile.getBackPackCapacity());
+            List<Chromosome> tempList = knapsackAlgorithm.processAlgorithm(chromosomeList,
+                    readFromFile.getItemArrayList(), readFromFile.getBackPackCapacity());
             chromosomeList = tempList;
             counter++;
-        }while (counter <= readFromFile.getGenNumber() && knapsackAlgorithm.ifMostHaveSameValue(chromosomeList));
+            //System.out.println(counter);
+        } while ( ((counter < readFromFile.getGenNumber() && !knapsackAlgorithm.ifMostHaveSameValue(chromosomeList))));
         return chromosomeList;
     }
 }
 
+
+//&& knapsackAlgorithm.ifMostHaveSameValue(chromosomeList)

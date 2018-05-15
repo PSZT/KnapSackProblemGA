@@ -1,10 +1,7 @@
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class ReadFromFile {
     private String fileName;
@@ -60,7 +57,7 @@ public class ReadFromFile {
                 ", genNumber=" + genNumber +
                 ", popSize=" + popSize +
                 ", backPackCapacity=" + backPackCapacity +
-                ", itemArrayList=" + itemArrayList +
+                ", itemArrayList=" + Arrays.toString(itemArrayList.toArray()) +
                 '}';
     }
 }
