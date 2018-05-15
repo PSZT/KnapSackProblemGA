@@ -13,6 +13,7 @@ public class KnapsackAlgorithm {
             List <Chromosome> crossoverTemp = crossoverChromosome(groupTemp);
             return  crossoverTemp;
             //mutacja tutej
+            //elo
         }
         else
             return chrPopulation;
