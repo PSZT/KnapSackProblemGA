@@ -15,7 +15,11 @@ public class App {
         int counter =0;
         ReadFromFile readFromFile = new ReadFromFile(fileName);
         readFromFile.readItems();
-        System.out.println(readFromFile.toString());
+        //System.out.println(readFromFile.toString());
+
+        List<Item> items = readFromFile.getItemArrayList();
+
+        //System.out.println(items.get(0).getBenefit());
 
         //we create random population
         for(int i = 0 ; i < readFromFile.getPopSize() ; i++) {
@@ -26,14 +30,15 @@ public class App {
 
         do {
             List<Chromosome> tempList = knapsackAlgorithm.processAlgorithm(chromosomeList,
-                    readFromFile.getItemArrayList(), readFromFile.getBackPackCapacity());
+                    readFromFile.getItemArrayList(), readFromFile.getKnapsackCapacity());
             chromosomeList = tempList;
             counter++;
-            //System.out.println(counter);
-        } while ( ((counter < readFromFile.getGenNumber() && !knapsackAlgorithm.ifMostHaveSameValue(chromosomeList))));
+            System.out.println(counter);
+        } while ( !(knapsackAlgorithm.ifMostHaveSameValue(chromosomeList)));
         return chromosomeList;
     }
 }
 
 
 //&& knapsackAlgorithm.ifMostHaveSameValue(chromosomeList)
+//(counter > readFromFile.getGenNumber())
