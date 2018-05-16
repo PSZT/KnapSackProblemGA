@@ -38,46 +38,13 @@ public class Population {
     }
 
     //we calculate fitness for each chromosome
-    public boolean chromosomesFitness(List<Item> items,int capacityOfKnapsack) {
+    /*public boolean chromosomesFitness(List<Item> items,int capacityOfKnapsack) {
         for (Chromosome chr : chromosomeList) {
             chr.fitnessCalculate(items,capacityOfKnapsack);
         }
         if(ifMostHaveSameValue())
             return true;
         return false;
-    }
-
-    /*private boolean checkEqualFitnessPercentage() {
-        List<Pair<Integer,Integer>> pairs = new ArrayList<>();
-        double perc =  populationSize * 0.9;
-        checkFitness(pairs);
-        for(Pair p : pairs) {
-            if((double)p.getLeft() > perc) {
-                return true;
-            }
-        }
-        return false;
-    }*/
-
-    /*private void checkFitness(List<Pair<Integer,Integer>> pairs) {
-        for (Chromosome chr : chromosomeList) {
-            if (pairs.size() == 0) {
-                pairs.add(new Pair(chr.getChrTotalBenefit(), 1));
-            } else {
-                int index = -1;
-                for (int i = 0; i < pairs.size(); i++) {
-                    if (pairs.get(i).getLeft().equals(chr.getChrTotalBenefit())) {
-                        index = i;
-                        i = pairs.size();
-                    }
-                }
-                if (index > -1) {
-                    pairs.get(index).setRight((int) pairs.get(index).getRight() + 1);
-                } else {
-                    pairs.add(new Pair(chr.getChrTotalBenefit(), 1));
-                }
-            }
-        }
     }*/
 
     public boolean ifMostHaveSameValue() {

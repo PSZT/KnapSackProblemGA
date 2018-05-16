@@ -46,7 +46,7 @@ public class Chromosome {
     public void setMutateGene(List<Item> items) {
         int n;
         n = rand.nextInt(size-1);
-        //jak zmienimy wartosc danego bitu to trzeba zmniejszyc/zwiekszyc volume i benefit calego chromosomu
+
         if(genes[n] == 1) {
             genes[n] = 0;
             chrTotalBenefit -= items.get(n).getBenefit();
@@ -57,8 +57,6 @@ public class Chromosome {
             chrTotalBenefit += items.get(n).getBenefit();
             chrTotalVolume += items.get(n).getVolume();
         }
-        //chrTotalBenefit = 0;
-        //chrTotalVolume = 0;
     }
 
 
@@ -110,7 +108,6 @@ public class Chromosome {
 
     @Override
     public String toString() {
-        //System.out.println();
         return "Chromosome{" +
 
                 "genes=" + Arrays.toString(genes) +
