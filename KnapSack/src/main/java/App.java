@@ -12,7 +12,7 @@ public class App {
         this.fileName = fileName;
     }
 
-    public Population calcuate() throws IOException {
+    public Population calculate() throws IOException {
 
         int counter = 0;
 

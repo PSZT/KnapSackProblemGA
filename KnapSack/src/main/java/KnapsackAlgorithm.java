@@ -64,14 +64,12 @@ public class KnapsackAlgorithm {
             }
             chrCrossOverPopulation.add(chosenChromosome);
         }
-        Population newPop = new Population(chrCrossOverPopulation.size(),chrCrossOverPopulation);
-        return newPop;
+        return new Population(chrCrossOverPopulation.size(),chrCrossOverPopulation);
     }
 
-    private Chromosome mutateChromosome(Chromosome chromosome,List<Item> items, int capacityOfKnapsack) {
+    private void mutateChromosome(Chromosome chromosome,List<Item> items, int capacityOfKnapsack) {
         chromosome.setMutateGene(items);
         chromosome.fitnessCalculate(items,capacityOfKnapsack);
-        return chromosome;
     }
 
     //potem zmien na private
@@ -86,9 +84,7 @@ public class KnapsackAlgorithm {
             if(n == 500)
                 mutateChromosome(newMutatePopulation.get(i),items,capacityOfKnapsack);
         }
-
-        Population newPop = new Population(newMutatePopulation.size(),newMutatePopulation);
-        return newPop;
+        return new Population(newMutatePopulation.size(),newMutatePopulation);
     }
 
     //potem zmien na private
@@ -126,7 +122,6 @@ public class KnapsackAlgorithm {
             chr2.fitnessCalculate(items, capacityOfKnapsack);
             newCrossoverPopulation.add(chr2);
         }
-        Population newPop = new Population(newCrossoverPopulation.size(),newCrossoverPopulation);
-        return newPop;
+        return new Population(newCrossoverPopulation.size(),newCrossoverPopulation);
     }
 }
