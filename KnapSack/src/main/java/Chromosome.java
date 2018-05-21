@@ -1,20 +1,20 @@
 import java.security.SecureRandom;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 public class Chromosome {
     private int size;
-    private int [] genes;
+    private int[] genes;
     private int chrTotalVolume;
     private int chrTotalBenefit;
-    private static SecureRandom rand;
+    private Random rand = new Random();
 
     public Chromosome(int size) {
-        this.rand = new SecureRandom();
         this.size = size;
         this.genes = new int[size];
 
-        for(int i:genes) {
+        for (int i : genes) {
             i = 0;
         }
 
@@ -29,31 +29,29 @@ public class Chromosome {
     }
 
     //dodalem to z randem na potrzeby testow, ktore sobie robiłem
-    public Chromosome(int size,int[] newGenes) {
+    public Chromosome(int size, int[] newGenes) {
         this.size = size;
         this.genes = newGenes;
-        this.rand = new SecureRandom(); //na potrzeby mojego testowania
         this.chrTotalBenefit = 0;
         this.chrTotalVolume = 0;
     }
 
     public void generateRandomChromosome() {
-        for (int i=0 ; i<genes.length ; i++) {
+        for (int i = 0; i < genes.length; i++) {
             genes[i] = rand.nextInt(2);
         }
     }
 
     public void setMutateGene(List<Item> items) {
         int n;
-        n = rand.nextInt(size-1);
+        n = rand.nextInt(size - 1);
 
-        if(genes[n] == 1) {
+        if (genes[n] == 1) {
             genes[n] = 0;
             chrTotalBenefit -= items.get(n).getBenefit();
             chrTotalVolume -= items.get(n).getVolume();
-        }
-        else{
-                genes[n] = 1;
+        } else {
+            genes[n] = 1;
             chrTotalBenefit += items.get(n).getBenefit();
             chrTotalVolume += items.get(n).getVolume();
         }
@@ -72,12 +70,12 @@ public class Chromosome {
         return chrTotalBenefit;
     }
 
-    public void fitnessCalculate(List<Item> items,int capacityOfKnapsack) {
+    public void fitnessCalculate(List<Item> items, int capacityOfKnapsack) {
 
         chrTotalVolume = 0;
         chrTotalBenefit = 0;
 
-        for (int i=0 ; i < size ; i++) {
+        for (int i = 0; i < size; i++) {
             //if current item is included in knapsack, add its volume and benefit
             //to the total volume and benefit
             if (genes[i] == 1) {
@@ -89,9 +87,9 @@ public class Chromosome {
                 int n;
                 //Randomly choose items from the chromosome
                 //until we generate an item that is included in the knapsack
-                while(true) {
-                    n = rand.nextInt(size-1);
-                    if(genes[n] == 1) {
+                while (true) {
+                    n = rand.nextInt(size - 1);
+                    if (genes[n] == 1) {
                         genes[n] = 0;
                         break;
                     }

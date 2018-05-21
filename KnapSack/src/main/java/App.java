@@ -1,13 +1,23 @@
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class App {
+    public static void main(String args[]) {
+        App app = new App("KnapSack/src/main/resources/FirstSet");
+        try {
+            Population population = app.calculate();
+            System.out.println(population.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     String fileName;
     KnapsackAlgorithm knapsackAlgorithm = new KnapsackAlgorithm();
     Population population;
     List<Item> items;
+
     public App(String fileName) {
         this.fileName = fileName;
     }
@@ -16,28 +26,24 @@ public class App {
 
         int counter = 0;
 
-        ReadFromFile readFromFile = new ReadFromFile(fileName);
-        readFromFile.readItems();
+        FileParser fileParser = new FileParser(fileName);
+        fileParser.readItems();
 
         //creating items
         items = new ArrayList<>();
-        items = readFromFile.getItemArrayList();
+        items = fileParser.getItemArrayList();
 
         //creating population
-        population = new Population(readFromFile.getPopSize());
-        population.generateRandomPopulation(readFromFile.getItemArrayList().size());
+        population = new Population(fileParser.getPopSize());
+        population.generateRandomPopulation(fileParser.getItemArrayList().size());
 
         do {
-            population = knapsackAlgorithm.processAlgorithm(population, readFromFile.getItemArrayList(),
-                                                            readFromFile.getKnapsackCapacity());
+            population = knapsackAlgorithm.processAlgorithm(population, fileParser.getItemArrayList(),
+                    fileParser.getKnapsackCapacity());
             counter++;
             System.out.println(counter);
-        } while ( !(counter > readFromFile.getGenNumber() && (population.ifMostHaveSameValue())));
+        } while (!(counter > fileParser.getGenNumber() && (population.ifMostHaveSameValue())));
 
         return population;
     }
 }
-
-
-//&& knapsackAlgorithm.ifMostHaveSameValue(chromosomeList)
-//(counter > readFromFile.getGenNumber())

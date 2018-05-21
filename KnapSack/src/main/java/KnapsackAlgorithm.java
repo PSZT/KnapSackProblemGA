@@ -4,25 +4,21 @@ import java.util.List;
 
 public class KnapsackAlgorithm {
 
-    public Population processAlgorithm(Population population,List<Item> items,int capacityOfKnapsack){
+    public Population processAlgorithm(Population population, List<Item> items, int capacityOfKnapsack) {
 
         fitnessCalcAll(population.getChromosomeList(), items, capacityOfKnapsack);
-        /*for (Chromosome chromosome:population.getChromosomeList()) {
-            chromosome.fitnessCalculate(items, capacityOfKnapsack);
-        }*/
 
-        if(!population.ifMostHaveSameValue()){
+        if (!population.ifMostHaveSameValue()) {
             Population groupTemp = groupSelection(population);
-            Population crossoverTemp = crossoverChromosomes(groupTemp,items,capacityOfKnapsack);
-            Population mutateTemp = mutateChromosomes(crossoverTemp,items,capacityOfKnapsack);
-            return  mutateTemp;
-        }
-        else
+            Population crossoverTemp = crossoverChromosomes(groupTemp, items, capacityOfKnapsack);
+            Population mutateTemp = mutateChromosomes(crossoverTemp, items, capacityOfKnapsack);
+            return mutateTemp;
+        } else
             return population;
     }
 
     public void fitnessCalcAll(List<Chromosome> chromosomes, List<Item> items, int capacityOfKnapsack) {
-        for (Chromosome chromosome:chromosomes) {
+        for (Chromosome chromosome : chromosomes) {
             chromosome.fitnessCalculate(items, capacityOfKnapsack);
         }
     }
@@ -30,13 +26,13 @@ public class KnapsackAlgorithm {
     //potem zmien na private
     public Population groupSelection(Population population) {
         List<Chromosome> chrGroupPopulation = new ArrayList<>(population.getChromosomeList());
-        Collections.sort(chrGroupPopulation,new ChromosomeComparator());
+        Collections.sort(chrGroupPopulation, new ChromosomeComparator());
         List<Chromosome> chrCrossOverPopulation = new ArrayList<>();
         int randomChromosomeIndex;
         Random rand = new Random();
 
-        for(int i = 0; i < population.getPopulationSize(); i++ ) {
-            int randomNumber  = rand.nextInt(99) + 1;
+        for (int i = 0; i < population.getPopulationSize(); i++) {
+            int randomNumber = rand.nextInt(99) + 1;
             Chromosome chosenChromosome;
 
             if (randomNumber >= 1 && randomNumber < 50) {
@@ -64,12 +60,12 @@ public class KnapsackAlgorithm {
             }
             chrCrossOverPopulation.add(chosenChromosome);
         }
-        return new Population(chrCrossOverPopulation.size(),chrCrossOverPopulation);
+        return new Population(chrCrossOverPopulation.size(), chrCrossOverPopulation);
     }
 
-    private void mutateChromosome(Chromosome chromosome,List<Item> items, int capacityOfKnapsack) {
+    private void mutateChromosome(Chromosome chromosome, List<Item> items, int capacityOfKnapsack) {
         chromosome.setMutateGene(items);
-        chromosome.fitnessCalculate(items,capacityOfKnapsack);
+        chromosome.fitnessCalculate(items, capacityOfKnapsack);
     }
 
     //potem zmien na private
@@ -78,34 +74,34 @@ public class KnapsackAlgorithm {
 
         List<Chromosome> newMutatePopulation = new ArrayList<>(population.getChromosomeList());
 
-        for(int i = 0 ; i <  newMutatePopulation.size() ; i++) {
+        for (int i = 0; i < newMutatePopulation.size(); i++) {
 
             int n = rand.nextInt(999);
-            if(n == 500)
-                mutateChromosome(newMutatePopulation.get(i),items,capacityOfKnapsack);
+            if (n == 500)
+                mutateChromosome(newMutatePopulation.get(i), items, capacityOfKnapsack);
         }
-        return new Population(newMutatePopulation.size(),newMutatePopulation);
+        return new Population(newMutatePopulation.size(), newMutatePopulation);
     }
 
     //potem zmien na private
-    public Population crossoverChromosomes(Population population, List<Item> items, int capacityOfKnapsack)
-    {
+    public Population crossoverChromosomes(Population population, List<Item> items, int capacityOfKnapsack) {
         Random rand = new Random();
         List<Chromosome> chromosomeList = new ArrayList<>(population.getChromosomeList());
-        int firstChrIndex = rand.nextInt(population.getPopulationSize()-1);
-        int secondChrIndex = rand.nextInt(population.getPopulationSize()-1);
-        int d = rand.nextInt(population.getPopulationSize()-1);
 
-        Chromosome firstChr = chromosomeList.get(firstChrIndex);
-        Chromosome secondChr = chromosomeList.get(secondChrIndex);
+        int genesLength = population.chromosomeList.get(0).getGenes().length;
 
-        int genesLength = firstChr.getGenes().length;
-        int newGenes1[] = new int[firstChr.getGenes().length];
-        int newGenes2[] = new int[firstChr.getGenes().length];
+        ArrayList<Chromosome> newCrossoverPopulation = new ArrayList<>();
 
-        List<Chromosome> newCrossoverPopulation = new ArrayList<>();
+        for (int j = 0; j < population.getPopulationSize() / 2; j++) {
 
-        for(int j =0 ; j< population.getPopulationSize()/2 ; j++) {
+            int firstChrIndex = rand.nextInt(population.getPopulationSize() - 1);
+            int secondChrIndex = rand.nextInt(population.getPopulationSize() - 1);
+            int d = rand.nextInt(population.getPopulationSize() - 1);
+            Chromosome firstChr = chromosomeList.get(firstChrIndex);
+            Chromosome secondChr = chromosomeList.get(secondChrIndex);
+            int newGenes1[] = new int[genesLength];
+            int newGenes2[] = new int[genesLength];
+
             for (int i = 0; i < genesLength; i++) {
                 if (i < d) {
                     newGenes1[i] = firstChr.getGenes()[i];
@@ -118,10 +114,11 @@ public class KnapsackAlgorithm {
             Chromosome chr1 = new Chromosome(genesLength, newGenes1);
             Chromosome chr2 = new Chromosome(genesLength, newGenes2);
             chr1.fitnessCalculate(items, capacityOfKnapsack);
-            newCrossoverPopulation.add(chr1);
             chr2.fitnessCalculate(items, capacityOfKnapsack);
-            newCrossoverPopulation.add(chr2);
+            newCrossoverPopulation.add(chr1);
+            newCrossoverPopulation.add(new Chromosome(genesLength, newGenes2));
+
         }
-        return new Population(newCrossoverPopulation.size(),newCrossoverPopulation);
+        return new Population(newCrossoverPopulation.size(), newCrossoverPopulation);
     }
 }

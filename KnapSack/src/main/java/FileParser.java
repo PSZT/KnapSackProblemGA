@@ -3,14 +3,14 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.*;
 
-public class ReadFromFile {
+public class FileParser {
     private String fileName;
     private int genNumber;
     private int popSize;
     private int knapsackCapacity;
     private List<Item> itemArrayList;
 
-    public ReadFromFile(String fileName) {
+    public FileParser(String fileName) {
         this.fileName = fileName;
         itemArrayList = new ArrayList<>();
     }
@@ -52,7 +52,7 @@ public class ReadFromFile {
 
     @Override
     public String toString() {
-        return "ReadFromFile{" +
+        return "FileParser{" +
                 "fileName='" + fileName + '\'' +
                 ", genNumber=" + genNumber +
                 ", popSize=" + popSize +
