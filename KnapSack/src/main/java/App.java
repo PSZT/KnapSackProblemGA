@@ -6,8 +6,8 @@ public class App {
     public static void main(String args[]) {
         App app = new App("KnapSack/src/main/resources/FirstSet");
         try {
-            Population population = app.calculate();
-            System.out.println(population.toString());
+            ArrayList<Population> population = app.calculate();
+            System.out.println(population);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -22,13 +22,13 @@ public class App {
         this.fileName = fileName;
     }
 
-    public Population calculate() throws IOException {
+    public ArrayList<Population> calculate() throws IOException {
 
         int counter = 0;
 
         FileParser fileParser = new FileParser(fileName);
         fileParser.readItems();
-
+        ArrayList<Population> populations = new ArrayList<>();
         //creating items
         items = new ArrayList<>();
         items = fileParser.getItemArrayList();
@@ -41,9 +41,9 @@ public class App {
             population = knapsackAlgorithm.processAlgorithm(population, fileParser.getItemArrayList(),
                     fileParser.getKnapsackCapacity());
             counter++;
-            System.out.println(counter);
+            populations.add(population);
         } while (!(counter > fileParser.getGenNumber() && (population.ifMostHaveSameValue())));
 
-        return population;
+        return populations;
     }
 }
