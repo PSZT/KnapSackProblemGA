@@ -1,13 +1,12 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class Population {
-    int populationSize;
-    List<Chromosome> chromosomeList;
 
-    public Population() {
-        this.populationSize = 0;
-        chromosomeList = new ArrayList<>();
-    }
+    private int populationSize;
+    private List<Chromosome> chromosomeList;
 
     public Population(int populationSize) {
         this.populationSize = populationSize;
@@ -20,7 +19,7 @@ public class Population {
     }
 
     public void generateRandomPopulation(int chrSize) {
-        for(int i = 0 ; i < populationSize ; i++) {
+        for (int i = 0; i < chrSize; i++) {
             Chromosome chr = new Chromosome(chrSize);
             chr.generateRandomChromosome();
             chromosomeList.add(chr);
@@ -35,24 +34,14 @@ public class Population {
         return chromosomeList;
     }
 
-    //we calculate fitness for each chromosome
-    /*public boolean chromosomesFitness(List<Item> items,int capacityOfKnapsack) {
-        for (Chromosome chr : chromosomeList) {
-            chr.fitnessCalculate(items,capacityOfKnapsack);
-        }
-        if(ifMostHaveSameValue())
-            return true;
-        return false;
-    }*/
-
     public boolean ifMostHaveSameValue() {
 
         List<Chromosome> tempArrayList = new ArrayList<>(chromosomeList);
-        Collections.sort(tempArrayList,new ChromosomeComparator());
+        Collections.sort(tempArrayList, new ChromosomeComparator());
         int currValue = chromosomeList.get(0).getChrTotalBenefit();
         int counter = 1;
         for (Chromosome chromosome : tempArrayList) {
-            if (chromosome.getChrTotalBenefit()!= currValue)  {
+            if (chromosome.getChrTotalBenefit() != currValue) {
                 currValue = chromosome.getChrTotalBenefit();
                 counter = 1;
             } else
@@ -64,6 +53,28 @@ public class Population {
         return false;
     }
 
+    public double averageBenefit() {
+        int counter = 0, sum = 0;
+        for (Chromosome chromosome : this.chromosomeList) {
+            counter++;
+            sum += chromosome.getChrTotalBenefit();
+        }
+        return sum / counter;
+
+    }
+
+    public ArrayList<Chromosome> twoBestChromosomes() {
+        ArrayList<Chromosome> bestChromosomes = new ArrayList<>(Arrays.asList(chromosomeList.get(0), chromosomeList.get(1)));
+        for (Chromosome chromosome : this.chromosomeList) {
+            if (chromosome.getChrTotalBenefit() > bestChromosomes.get(0).getChrTotalBenefit())
+                bestChromosomes.set(0, chromosome);
+        }
+        for (Chromosome chromosome : this.chromosomeList) {
+            if (chromosome.getChrTotalBenefit() > bestChromosomes.get(1).getChrTotalBenefit() && chromosome.getChrTotalBenefit() != bestChromosomes.get(0).getChrTotalBenefit())
+                bestChromosomes.set(1, chromosome);
+        }
+        return bestChromosomes;
+    }
 
     @Override
     public String toString() {

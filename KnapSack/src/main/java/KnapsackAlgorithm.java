@@ -23,7 +23,6 @@ public class KnapsackAlgorithm {
         }
     }
 
-    //potem zmien na private
     public Population groupSelection(Population population) {
         List<Chromosome> chrGroupPopulation = new ArrayList<>(population.getChromosomeList());
         Collections.sort(chrGroupPopulation, new ChromosomeComparator());
@@ -83,20 +82,19 @@ public class KnapsackAlgorithm {
         return new Population(newMutatePopulation.size(), newMutatePopulation);
     }
 
-    //potem zmien na private
     public Population crossoverChromosomes(Population population, List<Item> items, int capacityOfKnapsack) {
         Random rand = new Random();
         List<Chromosome> chromosomeList = new ArrayList<>(population.getChromosomeList());
 
-        int genesLength = population.chromosomeList.get(0).getGenes().length;
+        int genesLength = population.getChromosomeList().get(0).getGenes().length;
 
-        ArrayList<Chromosome> newCrossoverPopulation = new ArrayList<>();
+        ArrayList<Chromosome> newCrossoverPopulation = new ArrayList<>(population.twoBestChromosomes());
 
-        for (int j = 0; j < population.getPopulationSize() / 2; j++) {
+        for (int j = 0; j < population.getPopulationSize() / 2 - 1; j++) {
 
             int firstChrIndex = rand.nextInt(population.getPopulationSize() - 1);
             int secondChrIndex = rand.nextInt(population.getPopulationSize() - 1);
-            int d = rand.nextInt(population.getPopulationSize() - 1);
+            int d = rand.nextInt(genesLength);
             Chromosome firstChr = chromosomeList.get(firstChrIndex);
             Chromosome secondChr = chromosomeList.get(secondChrIndex);
             int newGenes1[] = new int[genesLength];
@@ -116,8 +114,7 @@ public class KnapsackAlgorithm {
             chr1.fitnessCalculate(items, capacityOfKnapsack);
             chr2.fitnessCalculate(items, capacityOfKnapsack);
             newCrossoverPopulation.add(chr1);
-            newCrossoverPopulation.add(new Chromosome(genesLength, newGenes2));
-
+            newCrossoverPopulation.add(chr2);
         }
         return new Population(newCrossoverPopulation.size(), newCrossoverPopulation);
     }
