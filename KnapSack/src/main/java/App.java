@@ -17,10 +17,20 @@ public class App {
     KnapsackAlgorithm knapsackAlgorithm = new KnapsackAlgorithm();
     Population population;
     List<Item> items;
+    int capacityOfKnapsack;
+    int numberOfGenerations;
+    int numberOfItems;
+    int sizeOfpopulation;
 
     public App(String fileName) {
         this.fileName = fileName;
     }
+
+
+
+    /*public ArrayList<Population> calcuate2() throws IOException {
+
+    }*/
 
     public ArrayList<Population> calculate() throws IOException {
 

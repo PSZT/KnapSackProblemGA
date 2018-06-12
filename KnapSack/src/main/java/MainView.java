@@ -39,13 +39,13 @@ public class MainView  extends Application{
         layoutMainMenu.setAlignment(Pos.CENTER);
         sceneMainMenu = new Scene(layoutMainMenu, 300, 200);
 
-        //wpisywanie reczne
+        /*//wpisywanie reczne
         VBox layoutSetItems = new VBox(10);
         //layoutSetItems.getChildren().addAll(label, buttonSetItems, buttonReadFromFile, buttonExit);
         //layoutSetItems.setAlignment(Pos.CENTER);
-        Scene sceneSetItems = new Scene(layoutSetItems, 500, 500);
+        Scene sceneSetItems = new Scene(layoutSetItems, 500, 500);*/
 
-        buttonSetItems.setOnAction(e -> window.setScene(sceneSetItems));
+        buttonSetItems.setOnAction(e -> SetItemsManuallyView.setSceneSetItemsManually());
         buttonReadFromFile.setOnAction(e -> ReadFromFileView.setSceneReadFromFile());
         buttonExit.setOnAction(e -> closeProgram());
 

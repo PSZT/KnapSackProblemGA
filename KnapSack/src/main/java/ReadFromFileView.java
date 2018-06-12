@@ -51,7 +51,10 @@ public class ReadFromFileView {
                 App app = new App(filePath);
                 try {
                     ArrayList<Population> population = app.calculate();
-                    System.out.println(population);
+                    //System.out.println(population);
+                    Chromosome tempChr = population.get(population.size()-1).getTheFittestChromosome();
+                    //tempChr.getChrTotalBenefit();
+                    ChartView.drawChart(population);
                 } catch (Exception e1) {
                     e1.printStackTrace();
                 }

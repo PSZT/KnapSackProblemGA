@@ -19,7 +19,8 @@ public class Population {
     }
 
     public void generateRandomPopulation(int chrSize) {
-        for (int i = 0; i < chrSize; i++) {
+        //tutaj wczesniej bylo chrSize
+        for (int i = 0; i < populationSize; i++) {
             Chromosome chr = new Chromosome(chrSize);
             chr.generateRandomChromosome();
             chromosomeList.add(chr);
@@ -51,6 +52,13 @@ public class Population {
                 return true;
         }
         return false;
+    }
+
+    public Chromosome getTheFittestChromosome() {
+        List<Chromosome> tempArrayList = new ArrayList<>(chromosomeList);
+        Collections.sort(tempArrayList, new ChromosomeComparator());
+        System.out.println(tempArrayList.get(0));
+        return tempArrayList.get(0);
     }
 
     public double averageBenefit() {
