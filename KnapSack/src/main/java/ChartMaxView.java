@@ -6,12 +6,12 @@ import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
-public class ChartView {
+public class ChartMaxView {
 
     public static void drawChart(ArrayList<Population> arrayOfPopulations) {
         try {
-            Stage stage = new Stage();
-            stage.setTitle("Wykres sredniej wartosci benefitu w kazdej generacji.");
+            Stage stageMax = new Stage();
+            stageMax.setTitle("Wykres maksymalnej wartsoci benefitu w kazdej populacji");
             //defining the axes
             final NumberAxis xAxis = new NumberAxis();
             final NumberAxis yAxis = new NumberAxis();
@@ -20,30 +20,30 @@ public class ChartView {
             final LineChart<Number, Number> lineChart =
                     new LineChart<Number, Number>(xAxis, yAxis);
 
-            lineChart.setTitle("Sredni benefit plecaka");
+            lineChart.setTitle("Maksymalny benefit plecaka");
             //defining a series
-            XYChart.Series series = new XYChart.Series();
-            series.setName("Problem plecakowy - srednia wartosc");
+            XYChart.Series seriesMax = new XYChart.Series();
+            seriesMax.setName("Problem plecakowy - maksymalna wartosc");
             //App app = new App("KnapSack/src/main/resources/FirstSet");
 
             ArrayList<Population> populations = arrayOfPopulations;
 
             int counter = 1;
             for (Population population : populations) {
-                series.getData().add(new XYChart.Data(counter, population.averageBenefit()));
-                //seriesMax.getData().add(new XYChart.Data(counter, population.getTheFittestChromosome().getChrTotalBenefit()));
+                //series.getData().add(new XYChart.Data(counter, population.averageBenefit()));
+                seriesMax.getData().add(new XYChart.Data(counter, population.getTheFittestChromosome().getChrTotalBenefit()));
                 counter++;
 
             }
 
-            Scene scene = new Scene(lineChart, 800, 600);
-            lineChart.getData().add(series);
+
+            Scene scene2 = new Scene(lineChart, 800, 600);
+            lineChart.getData().add(seriesMax);
 
 
-            stage.setScene(scene);
-            //stage.showAndWait();
-            stage.show();
 
+            stageMax.setScene(scene2);
+            stageMax.showAndWait();
 
         } catch (Exception e) {
             e.printStackTrace();

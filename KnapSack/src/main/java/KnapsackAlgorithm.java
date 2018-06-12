@@ -75,8 +75,10 @@ public class KnapsackAlgorithm {
 
         for (int i = 0; i < newMutatePopulation.size(); i++) {
 
-            int n = rand.nextInt(999);
-            if (n == 500)
+            //tutaj bylo 999 i 500
+
+            int n = rand.nextInt(9);
+            if (n == 5)
                 mutateChromosome(newMutatePopulation.get(i), items, capacityOfKnapsack);
         }
         return new Population(newMutatePopulation.size(), newMutatePopulation);

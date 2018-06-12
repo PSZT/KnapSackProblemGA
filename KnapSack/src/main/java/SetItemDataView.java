@@ -78,12 +78,14 @@ public class SetItemDataView {
                 App app = new App(capacityOfKnapsack, numberOfGenerations, numberOfItems, sizeOfPopulation, items);
                 ArrayList<Population> populations = app.calculate2();
                 Chromosome tempChr = populations.get(populations.size()-1).getTheFittestChromosome();
+
                 ChartView.drawChart(populations);
+                ChartMaxView.drawChart(populations);
 
                 MoreGenerationsView.setSceneMoreGenerations(populations, app);
 
                 //wracamy do menu glownego
-                MainView.getWindow().setScene(MainView.getSceneMainMenu());
+                //MainView.getWindow().setScene(MainView.getSceneMainMenu());
             } catch (NumberFormatException | IOException e1) {
                 System.out.println(e1);
             }

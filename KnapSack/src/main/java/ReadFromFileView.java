@@ -53,7 +53,7 @@ public class ReadFromFileView {
                     Chromosome tempChr = populations.get(populations.size()-1).getTheFittestChromosome();
 
                     ChartView.drawChart(populations);
-
+                    ChartMaxView.drawChart(populations);
 
                     MoreGenerationsView.setSceneMoreGenerations(populations, app);
                     //pytamy czy chcemy liczyc jeszcze raz

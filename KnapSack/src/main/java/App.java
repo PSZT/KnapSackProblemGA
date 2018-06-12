@@ -45,7 +45,9 @@ public class App {
             population = knapsackAlgorithm.processAlgorithm(population, items, capacityOfKnapsack);
             counter++;
             populations.add(population);
-        } while (!(counter > moreGen && (population.ifMostHaveSameValue())));
+        } while (!(counter > moreGen));
+
+        //while (!(counter > moreGen && (population.ifMostHaveSameValue())));
 
         return populations;
     }
@@ -66,7 +68,9 @@ public class App {
             population = knapsackAlgorithm.processAlgorithm(population, items, capacityOfKnapsack);
             counter++;
             populations.add(population);
-        } while (!(counter > numberOfGenerations && (population.ifMostHaveSameValue())));
+        } while (!(counter > numberOfGenerations ));
+
+        //while (!(counter > numberOfGenerations && (population.ifMostHaveSameValue())));
 
         return populations;
     }
@@ -96,7 +100,9 @@ public class App {
                     fileParser.getKnapsackCapacity());
             counter++;
             populations.add(population);
-        } while (!(counter > fileParser.getGenNumber() && (population.ifMostHaveSameValue())));
+        } while (!(counter > fileParser.getGenNumber()));
+
+        //while (!(counter > fileParser.getGenNumber() && (population.ifMostHaveSameValue())));
 
         return populations;
     }

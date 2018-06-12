@@ -16,7 +16,7 @@ public class MoreGenerationsView {
     public static void setSceneMoreGenerations(ArrayList<Population> pops, App app) {
 
         Boolean result = ConfirmExit.display("Czy chcesz kontynuowac obliczenia ?");
-        System.out.println("Rezultat: " + result);
+        //System.out.println("Rezultat: " + result);
         if(result) {
 
             GridPane gridMoreGenerations = new GridPane();
@@ -44,6 +44,7 @@ public class MoreGenerationsView {
                     Chromosome tempChr = populations.get(populations.size() - 1).getTheFittestChromosome();
 
                     ChartView.drawChart(populations);
+                    ChartMaxView.drawChart(populations);
 
                     MoreGenerationsView.setSceneMoreGenerations(populations, app);
 
