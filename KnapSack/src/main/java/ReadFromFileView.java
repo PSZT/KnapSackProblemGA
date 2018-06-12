@@ -40,7 +40,6 @@ public class ReadFromFileView {
         GridPane.setConstraints(setNameOfFileButton, 1,1);
         setNameOfFileButton.setOnAction(e -> {
             String nameOfFile = nameOfFileTextField.getText();
-            System.out.println(nameOfFile);
             if(nameOfFile.equals("FirstSet")) {
                 String filePath = "KnapSack/src/main/resources/";
                 filePath += nameOfFile;
@@ -50,17 +49,23 @@ public class ReadFromFileView {
 
                 App app = new App(filePath);
                 try {
-                    ArrayList<Population> population = app.calculate();
-                    //System.out.println(population);
-                    Chromosome tempChr = population.get(population.size()-1).getTheFittestChromosome();
-                    //tempChr.getChrTotalBenefit();
-                    ChartView.drawChart(population);
+                    ArrayList<Population> populations = app.calculate();
+                    Chromosome tempChr = populations.get(populations.size()-1).getTheFittestChromosome();
+
+                    ChartView.drawChart(populations);
+
+
+                    MoreGenerationsView.setSceneMoreGenerations(populations, app);
+                    //pytamy czy chcemy liczyc jeszcze raz
+                    //Boolean result = ConfirmExit.display("Czy chcesz kontynuowac obliczenia ?");
+                    //if(result) {
+                        //MoreGenerationsView.setSceneMoreGenerations(populations, app);
+                    //}
+
+                    //MainView.getWindow().setScene(MainView.getSceneMainMenu());
                 } catch (Exception e1) {
                     e1.printStackTrace();
                 }
-
-                MainView.getWindow().setScene(MainView.getSceneMainMenu());
-
             }
 
 

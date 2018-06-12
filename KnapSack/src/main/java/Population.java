@@ -57,7 +57,7 @@ public class Population {
     public Chromosome getTheFittestChromosome() {
         List<Chromosome> tempArrayList = new ArrayList<>(chromosomeList);
         Collections.sort(tempArrayList, new ChromosomeComparator());
-        System.out.println(tempArrayList.get(0));
+        //System.out.println(tempArrayList.get(0));
         return tempArrayList.get(0);
     }
 

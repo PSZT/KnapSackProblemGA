@@ -61,64 +61,6 @@ public class SetItemsManuallyView {
                 SetItemDataView.setSceneSetItemData(capacityOfKnapsack, numberOfGenerations, sizeOfPopulation,
                                             numberOfItems);
 
-                /*GridPane gridSetItems = new GridPane();
-                gridSetItems.setPadding(new Insets(10, 10, 10, 10));
-                gridSetItems.setVgap(8);
-                gridSetItems.setHgap(8);*/
-
-                /*List<Chromosome> items = new ArrayList<>();
-
-                Label howMuchLeftLabel = new Label("Wypelnij informacje o przedmiotach" );
-                GridPane.setConstraints(howMuchLeftLabel, 1, 0);
-
-                Vector<TextField> itemVolumes = new Vector<>();
-                Vector<TextField> itemBenefits = new Vector<>();
-
-                int i;
-
-                for (i =0 ; i<numberOfItems;i++) {
-                    //SCENA WYBIERANIA ITEMOW
-
-
-                    Label itemVolumeLabel = new Label("Objetosc przedmiotu");
-                    GridPane.setConstraints(itemVolumeLabel, 0, i+1);
-                    TextField itemVolumeTextField = new TextField();
-                    itemVolumeTextField.setPromptText("Podaj objetosc przedmiotu");
-                    GridPane.setConstraints(itemVolumeTextField, 1, i+1);
-
-                    Label itemBenefitLabel = new Label("Wartosc przedmiotu");
-                    GridPane.setConstraints(itemBenefitLabel, 0, i+2);
-                    TextField itemBenefitTextField = new TextField();
-                    itemBenefitTextField.setPromptText("Podaj wartosc przedmiotu");
-                    GridPane.setConstraints(itemBenefitTextField, 1, i+2);
-
-
-
-                    gridSetItemsManually.getChildren().addAll(howMuchLeftLabel, itemVolumeLabel, itemVolumeTextField,
-                            itemBenefitLabel, itemBenefitTextField);
-
-                    itemVolumes.add(itemVolumeTextField);
-                    itemBenefits.add(itemBenefitTextField);
-
-                }
-
-                Button addItemButton = new Button("Zatwierdz");
-                GridPane.setConstraints(addItemButton, 1,i+3);
-                addItemButton.setOnAction(e1 -> {
-                    for(int j = 0 ; j < numberOfItems ; j++) {
-                        System.out.println("Volume: " + itemVolumes.get(j).getText() +
-                                            " Benefit: " + itemBenefits.get(j).getText());
-                    }
-                });
-
-                gridSetItemsManually.getChildren().add(addItemButton);
-
-                gridSetItemsManually.getChildren().add(howMuchLeftLabel);*/
-
-                /*Scene sceneWhileItemsAreAdded = new Scene(gridSetItemsManually, 300, 600);
-                MainView.getWindow().setScene(sceneWhileItemsAreAdded);*/
-
-
                 System.out.println(capacityOfKnapsack + " " + numberOfGenerations + " " + sizeOfPopulation + " " +
                         numberOfItems);
 

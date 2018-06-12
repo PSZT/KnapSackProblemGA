@@ -59,7 +59,7 @@ public class MainView  extends Application{
     }
 
     private void closeProgram() {
-        Boolean result = ConfirmExit.display();
+        Boolean result = ConfirmExit.display("Czy na pewno chcesz zamknac program ?");
         if(result)
             window.close();
     }

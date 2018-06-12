@@ -1,10 +1,14 @@
+import javafx.application.Application;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
@@ -44,16 +48,44 @@ public class SetItemDataView {
             gridSetItemData.getChildren().addAll(volumeLabel,volumeTextField,benefitLabel,benefitTextField);
         }
 
+        //ekran w trakcie wykonywania algorytmu
+        Label whileAlgorithmIsProceedLabel = new Label("Algorytm sie wykonuje");
+        VBox layout = new VBox(10);
+        layout.setAlignment(Pos.CENTER);
+        layout.getChildren().add(whileAlgorithmIsProceedLabel);
+
+
+
+
+
+
+
         Button addItemsButton = new Button("ZATWIERDZ");
         GridPane.setConstraints(addItemsButton, 1,2*numberOfItems+2);
         addItemsButton.setOnAction(e -> {
-            List<Item> items = new ArrayList<>();
-            for(int i=0;i<numberOfItems;i++) {
-                int volume = Integer.parseInt(volumes.get(i).getText());
-                int benefit = Integer.parseInt(benefits.get(i).getText());
-                Item item = new Item(volume, benefit);
-                items.add(item);
-                System.out.println(item);
+            try {
+
+                Scene sceneWhileAlgorithmIsProceed = new Scene(layout, 300, 200);
+                MainView.getWindow().setScene(sceneWhileAlgorithmIsProceed);
+
+                List<Item> items = new ArrayList<>();
+                for (int i = 0; i < numberOfItems; i++) {
+                    int volume = Integer.parseInt(volumes.get(i).getText());
+                    int benefit = Integer.parseInt(benefits.get(i).getText());
+                    Item item = new Item(volume, benefit);
+                    items.add(item);
+                }
+                App app = new App(capacityOfKnapsack, numberOfGenerations, numberOfItems, sizeOfPopulation, items);
+                ArrayList<Population> populations = app.calculate2();
+                Chromosome tempChr = populations.get(populations.size()-1).getTheFittestChromosome();
+                ChartView.drawChart(populations);
+
+                MoreGenerationsView.setSceneMoreGenerations(populations, app);
+
+                //wracamy do menu glownego
+                MainView.getWindow().setScene(MainView.getSceneMainMenu());
+            } catch (NumberFormatException | IOException e1) {
+                System.out.println(e1);
             }
         });
 
@@ -62,7 +94,7 @@ public class SetItemDataView {
         backToMainViewButton.setOnAction(e -> MainView.getWindow().setScene(MainView.getSceneMainMenu()));
 
         gridSetItemData.getChildren().addAll(informationLabel, addItemsButton, backToMainViewButton);
-        Scene sceneSetItemData = new Scene(gridSetItemData, 400, numberOfItems*95);
+        Scene sceneSetItemData = new Scene(gridSetItemData, 400, numberOfItems*93);
         MainView.getWindow().setScene(sceneSetItemData);
 
     }

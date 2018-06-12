@@ -11,15 +11,15 @@ public class ConfirmExit {
 
     static boolean answer;
 
-    public static boolean display() {
+    public static boolean display(String message) {
 
         Stage window = new Stage();
 
         window.initModality(Modality.APPLICATION_MODAL);
-        window.setTitle("Confirm Exit");
+        window.setTitle("");
         window.setMinWidth(250);
         Label label = new Label();
-        label.setText("Czy na pewno chcesz zamknac program ?");
+        label.setText(message);
 
         Button yesButton = new Button("YES");
         yesButton.setOnAction(e -> {
